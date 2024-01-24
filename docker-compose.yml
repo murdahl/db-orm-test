@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  mssql-db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "YourStrong!Passw0rd"
+    ports:
+      - "1433:1433"
+    networks:
+      - net-backend
+
+  postgres-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: "customuser"
+      POSTGRES_PASSWORD: "YourStrong@Passw0rd"
+      POSTGRES_DB: "customdb"
+    ports:
+      - "5432:5432"
+    networks:
+      - net-backend
+
+networks:
+  net-backend:
+    driver: bridge
