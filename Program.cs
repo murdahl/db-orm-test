@@ -11,15 +11,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
 builder.Services.AddDbContext<SqlServerDbContext>(
     options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"))
@@ -28,6 +19,15 @@ builder.Services.AddDbContext<SqlServerDbContext>(
 builder.Services.AddDbContext<PostgreSqlDbContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreSqlConnection"))
 );
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 

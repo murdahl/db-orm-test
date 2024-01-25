@@ -2,12 +2,16 @@ version: "3.8"
 
 services:
   mssql-db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "YourStrong!Passw0rd"
+      MSSQL_PID: "Express"
+      LANG: "en_US.UTF-8"
+      LC_ALL: "en_US.UTF-8"
+      DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: "false"
     ports:
-      - "1433:1433"
+      - "1435:1433"
     networks:
       - net-backend
 
@@ -18,7 +22,7 @@ services:
       POSTGRES_PASSWORD: "YourStrong@Passw0rd"
       POSTGRES_DB: "customdb"
     ports:
-      - "5432:5432"
+      - "5435:5432"
     networks:
       - net-backend
 
