@@ -26,10 +26,10 @@ public class UsersController : ControllerBase
     {
         var userFromSqlServer = _sqlServerDbContext.Users.FirstOrDefault(u => u.Name == name);
 
-        var userFromPostgreSql = _postgreSqlDbContext.Users.FirstOrDefault(u => u.Name == name);
-        // var userFromPostgreSql = _postgreSqlDbContext.Users.FirstOrDefault(
-        //     u => EF.Functions.ILike(u.Name, name)
-        // );
+        // var userFromPostgreSql = _postgreSqlDbContext.Users.FirstOrDefault(u => u.Name == name);
+        var userFromPostgreSql = _postgreSqlDbContext.Users.FirstOrDefault(
+            u => EF.Functions.ILike(u.Name, name)
+        );
 
         return Ok(
             new { UserFromSqlServer = userFromSqlServer, UserFromPostgreSql = userFromPostgreSql }
